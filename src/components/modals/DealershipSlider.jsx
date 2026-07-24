@@ -15,14 +15,13 @@ export const DealershipSlider = () => {
       url: "https://www.deschamps-systems.com/",
       video: "https://www.youtube.com/embed/ajXLjjIbrG0?start=15"
     },
-    /*
     {
       id: "penta",
       name: t("dealerships.penta_name"),
       desc: `${t("dealerships.penta_desc1")}\n\n${t("dealerships.penta_desc2")}`,
       image: "/logo/penta.png", 
+      url: "https://www.penta.com.tr/"
     },
-    */
   ];
 
   const nextSlide = () => {
