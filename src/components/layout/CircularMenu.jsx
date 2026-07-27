@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { playWhooshSound } from "../../utils/sound";
 
 // Referans masaüstü çözünürlüğü (bu boyutta ölçek = 1.0 olur)
 const BASE_WIDTH = 1920;
@@ -164,6 +165,9 @@ export const CircularMenu = ({
                       if (isSelected) {
                         navigate("/");
                       } else {
+                        if (item.id === "subtitle3") {
+                          playWhooshSound();
+                        }
                         navigate(item.url);
                       }
                       setSelectedPart(isSelected ? null : item.id);
@@ -222,6 +226,9 @@ export const CircularMenu = ({
                     if (isSelected) {
                       navigate("/");
                     } else {
+                      if (item.id === "subtitle3") {
+                        playWhooshSound();
+                      }
                       navigate(item.url);
                     }
                     setSelectedPart(isSelected ? null : item.id);

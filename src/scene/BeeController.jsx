@@ -6,6 +6,7 @@
 import { useEffect, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import { useConfigStore } from "../store/useConfigStore";
+import { playWhooshSound } from "../utils/sound";
 import gsap from "gsap";
 
 export const BeeController = ({ controlsRef }) => {
@@ -71,6 +72,9 @@ export const BeeController = ({ controlsRef }) => {
       });
     } else if (selectedPart === "subtitle3") {
       // İleri Malzeme (subtitle3) için kamerayı patlayan parçaları görecek şekilde biraz geriye çekiyoruz
+      if (prevPartRef.current !== "subtitle3") {
+        playWhooshSound();
+      }
       gsap.killTweensOf(camera.position);
       gsap.killTweensOf(controlsRef.current.target);
       gsap.to(camera.position, {

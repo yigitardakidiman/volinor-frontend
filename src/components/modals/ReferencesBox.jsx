@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 const References = [
   { id: 1, name: "Kara Kuvvetleri Komutanlığı", logo: "/logo/kara.png" },
   { id: 2, name: "Asfat A.Ş", logo: "/logo/asfat.png" },
-  { id: 3, name: "TÜBİTAK MAM", logo: "/logo/tubitak.png" },
+  /*{ id: 3, name: "TÜBİTAK MAM", logo: "/logo/tubitak.png" },*/
   { id: 4, name: "Makine ve Kimya Endüstrisi A.Ş", logo: "/logo/mke.png" },
   { id: 5, name: "Ermaksan ", logo: "/logo/ermaksan.png" },
   { id: 6, name: "Lingua Yayıncılık", logo: "/logo/lingua.png" },
