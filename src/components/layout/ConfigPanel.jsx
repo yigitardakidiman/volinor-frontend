@@ -222,7 +222,7 @@ export const ConfigPanel = () => {
           </AnimatePresence>
 
           {/* Logo */}
-          <div className="absolute top-4 left-4 md:top-8 md:right-16 md:left-auto pointer-events-auto z-30 select-none flex flex-col items-start md:items-center">
+          <div className="absolute top-4 left-4 md:top-8 md:right-8 md:left-auto pointer-events-auto z-30 select-none flex flex-col items-start md:items-center">
             <div className="flex items-center gap-6">
               {/* Ozvia Logo - sadece Yapay Zeka ekranında */}
               <AnimatePresence>
