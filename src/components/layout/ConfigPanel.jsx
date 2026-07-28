@@ -7,7 +7,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useConfigStore } from "../../store/useConfigStore";
 import { PART_OPTIONS } from "../../data/parts";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { SidebarMenu } from "./SidebarMenu";
 import { CircularMenu } from "./CircularMenu";
 import { PageModal } from "../modals/PageModal";
@@ -17,12 +17,23 @@ import { useTranslation } from "react-i18next";
 import { SimulationOverlay } from "./SimulationOverlay";
 import { AIOverlay } from "./AIOverlay";
 import CurvedLoop from "../ui/CurvedLoop";
+import { useMobileSwipe } from "../../hooks/useMobileSwipe";
+import { MobileSwipeIndicator } from "./MobileSwipeIndicator";
+import { playWhooshSound } from "../../utils/sound";
+
+const MODULE_SEQUENCE = [
+  { id: "subtitle1", url: "/modelleme" },
+  { id: "subtitle2", url: "/simulasyon" },
+  { id: "subtitle3", url: "/ileri-malzeme" },
+  { id: "subtitle4", url: "/yapay-zeka" },
+];
 
 export const ConfigPanel = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const selectedPart = useConfigStore((state) => state.selectedPart);
   const setSelectedPart = useConfigStore((state) => state.setSelectedPart);
@@ -30,6 +41,51 @@ export const ConfigPanel = () => {
   const setActivePage = useConfigStore((state) => state.setActivePage);
   const selectedModel = useConfigStore((state) => state.selectedModel);
   const showUI = useConfigStore((state) => state.showUI);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const handleSwipeNext = useCallback(() => {
+    if (activePage !== null || isNavOpen) return;
+    const currentIndex = MODULE_SEQUENCE.findIndex((m) => m.id === selectedPart);
+    let nextIndex = 0;
+    if (currentIndex !== -1) {
+      nextIndex = (currentIndex + 1) % MODULE_SEQUENCE.length;
+    }
+    const targetModule = MODULE_SEQUENCE[nextIndex];
+    if (targetModule.id === "subtitle3") {
+      playWhooshSound();
+    }
+    setSelectedPart(targetModule.id);
+    navigate(targetModule.url);
+  }, [activePage, isNavOpen, selectedPart, setSelectedPart, navigate]);
+
+  const handleSwipePrev = useCallback(() => {
+    if (activePage !== null || isNavOpen) return;
+    const currentIndex = MODULE_SEQUENCE.findIndex((m) => m.id === selectedPart);
+    let prevIndex = MODULE_SEQUENCE.length - 1;
+    if (currentIndex !== -1) {
+      prevIndex = (currentIndex - 1 + MODULE_SEQUENCE.length) % MODULE_SEQUENCE.length;
+    }
+    const targetModule = MODULE_SEQUENCE[prevIndex];
+    if (targetModule.id === "subtitle3") {
+      playWhooshSound();
+    }
+    setSelectedPart(targetModule.id);
+    navigate(targetModule.url);
+  }, [activePage, isNavOpen, selectedPart, setSelectedPart, navigate]);
+
+  useMobileSwipe({
+    onSwipeLeft: handleSwipeNext,
+    onSwipeRight: handleSwipePrev,
+    enabled: isMobile && activePage === null && !isNavOpen,
+  });
 
   const isAnalysisMode =
     selectedPart === "subtitle1" && searchParams.get("mode") === "analiz";
@@ -160,9 +216,9 @@ export const ConfigPanel = () => {
               )}
           </AnimatePresence>
 
-          {/* Modelleme ve İleri Malzeme için ANASAYFA Butonu */}
+          {/* Masaüstü Modelleme ve İleri Malzeme için ANASAYFA Butonu */}
           <AnimatePresence>
-            {(selectedPart === "subtitle1" || selectedPart === "subtitle3") && (
+            {!isMobile && (selectedPart === "subtitle1" || selectedPart === "subtitle3") && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -192,6 +248,13 @@ export const ConfigPanel = () => {
                   {t("simulation.home_btn")}
                 </button>
               </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Mobil Görünüm için Swipe Sayfalama & Home Butonu Göstergesi */}
+          <AnimatePresence>
+            {isMobile && activePage === null && !isNavOpen && (
+              <MobileSwipeIndicator />
             )}
           </AnimatePresence>
 
