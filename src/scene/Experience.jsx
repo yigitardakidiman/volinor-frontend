@@ -19,17 +19,19 @@ import { BeeController } from "./BeeController";
 import { SimulationObstacles } from "./SimulationObstacles";
 import { WindParticles } from "./WindParticles";
 import { useConfigStore } from "../store/useConfigStore";
+import { useIsMobile } from "../hooks/useIsMobile";
 
 export const Experience = () => {
   const controlsRef = useRef();
   const selectedModel = useConfigStore((state) => state.selectedModel);
   const selectedPart = useConfigStore((state) => state.selectedPart);
+  const isMobile = useIsMobile();
 
   return (
     <Canvas
       shadows={{ type: THREE.PCFShadowMap }}
       dpr={[1, 1.5]}
-      camera={{ position: [1.5, 0.2, 1.5], fov: 45 }}
+      camera={{ position: isMobile ? [2.1, 0.3, 2.1] : [1.5, 0.2, 1.5], fov: 45 }}
       className="bg-transparent"
       performance={{ min: 0.5 }}>
       <fog attach="fog" args={["#020202", 12, 45]} />
@@ -100,10 +102,11 @@ export const Experience = () => {
           makeDefault
           enablePan={false}
           enableZoom={true}
+          enableRotate={!isMobile}
           minDistance={1}
           maxDistance={20}
           maxPolarAngle={Math.PI}
-          autoRotate={selectedPart !== "subtitle2"}
+          autoRotate={selectedPart !== "subtitle2" && selectedPart !== "subtitle4"}
           autoRotateSpeed={1}
         />
         {selectedModel === "bee" && <BeeController controlsRef={controlsRef} />}

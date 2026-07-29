@@ -6,6 +6,7 @@
 import { useEffect, useRef } from "react";
 import { useThree } from "@react-three/fiber";
 import { useConfigStore } from "../store/useConfigStore";
+import { useIsMobile } from "../hooks/useIsMobile";
 import { playWhooshSound } from "../utils/sound";
 import gsap from "gsap";
 
@@ -13,6 +14,7 @@ export const BeeController = ({ controlsRef }) => {
   const { camera } = useThree();
   const selectedPart = useConfigStore((state) => state.selectedPart);
   const prevPartRef = useRef(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!controlsRef.current) return;
@@ -24,10 +26,12 @@ export const BeeController = ({ controlsRef }) => {
       controlsRef.current.enablePan = false;
     } else {
       controlsRef.current.autoRotate = true;
-      controlsRef.current.enableRotate = true;
+      controlsRef.current.enableRotate = !isMobile;
       controlsRef.current.enableZoom = true;
       controlsRef.current.enablePan = true;
     }
+
+    const distMult = isMobile ? 1.4 : 1.0;
 
     if (selectedPart === "subtitle2") {
       gsap.killTweensOf(camera.position);
@@ -35,9 +39,9 @@ export const BeeController = ({ controlsRef }) => {
       // Ana sayfada model nereye dönük olursa olsun her zaman sabit,
       // aşağı indirilmiş (y: -0.2) standart görünüme sabitliyoruz.
       gsap.to(camera.position, {
-        x: 2.2,
+        x: 2.2 * distMult,
         y: -0.2,
-        z: 2.2,
+        z: 2.2 * distMult,
         duration: 1.6,
         ease: "power2.inOut",
         onUpdate: () => controlsRef.current?.update(),
@@ -55,9 +59,9 @@ export const BeeController = ({ controlsRef }) => {
       gsap.killTweensOf(camera.position);
       gsap.killTweensOf(controlsRef.current.target);
       gsap.to(camera.position, {
-        x: -5.3,
+        x: -5.3 * distMult,
         y: 1.2,
-        z: 5.3, // Kamera mesafesini 12'den 7.5 civarına düşürerek arıyı ideal boyuta getirdik
+        z: 5.3 * distMult, // Kamera mesafesini mobilde daha da geriye aldık
         duration: 1.6,
         ease: "power2.inOut",
         onUpdate: () => controlsRef.current?.update(),
@@ -78,9 +82,9 @@ export const BeeController = ({ controlsRef }) => {
       gsap.killTweensOf(camera.position);
       gsap.killTweensOf(controlsRef.current.target);
       gsap.to(camera.position, {
-        x: 1.5,
+        x: 1.5 * distMult,
         y: -0.5,
-        z: 2.0,
+        z: 2.0 * distMult,
         duration: 1.6,
         ease: "power2.inOut",
         onUpdate: () => controlsRef.current?.update(),
@@ -101,9 +105,9 @@ export const BeeController = ({ controlsRef }) => {
       gsap.killTweensOf(camera.position);
       gsap.killTweensOf(controlsRef.current.target);
       gsap.to(camera.position, {
-        x: 1.5,
+        x: 1.5 * distMult,
         y: 0.4,
-        z: 1.5,
+        z: 1.5 * distMult,
         duration: 1.6,
         ease: "power2.inOut",
         onUpdate: () => controlsRef.current?.update(),
@@ -119,7 +123,7 @@ export const BeeController = ({ controlsRef }) => {
     }
 
     prevPartRef.current = selectedPart;
-  }, [selectedPart, camera, controlsRef]);
+  }, [selectedPart, camera, controlsRef, isMobile]);
 
   return null;
 };

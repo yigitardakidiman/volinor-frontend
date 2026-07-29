@@ -18,6 +18,7 @@ import { SimulationOverlay } from "./SimulationOverlay";
 import { AIOverlay } from "./AIOverlay";
 import CurvedLoop from "../ui/CurvedLoop";
 import { useMobileSwipe } from "../../hooks/useMobileSwipe";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import { MobileSwipeIndicator } from "./MobileSwipeIndicator";
 import { playWhooshSound } from "../../utils/sound";
 
@@ -33,7 +34,7 @@ export const ConfigPanel = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
 
   const selectedPart = useConfigStore((state) => state.selectedPart);
   const setSelectedPart = useConfigStore((state) => state.setSelectedPart);
@@ -41,15 +42,6 @@ export const ConfigPanel = () => {
   const setActivePage = useConfigStore((state) => state.setActivePage);
   const selectedModel = useConfigStore((state) => state.selectedModel);
   const showUI = useConfigStore((state) => state.showUI);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   const handleSwipeNext = useCallback(() => {
     if (activePage !== null || isNavOpen) return;
