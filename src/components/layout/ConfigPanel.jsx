@@ -317,7 +317,7 @@ export const ConfigPanel = () => {
                   navigate("/");
                   setIsNavOpen(false);
                 }}
-                className="h-10 md:h-16 w-auto shrink-0 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] cursor-pointer hover:opacity-80 transition-opacity"
+                className="h-12 md:h-20 w-auto shrink-0 object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] cursor-pointer hover:opacity-80 transition-opacity"
               />
             </div>
           </div>

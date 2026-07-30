@@ -129,13 +129,30 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className={`absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-start p-6 pt-24 md:p-16 border-l border-[#ffb800]/10 ${activePage === "hakkimizda" ? "overflow-y-auto md:overflow-hidden bg-[#0a0a0a] custom-scrollbar" : "overflow-y-auto custom-scrollbar bg-[#0a0a0a]"}`}>
+          className={`absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-center p-6 pt-24 md:p-16 border-l border-[#ffb800]/10 ${activePage === "hakkimizda" ? "overflow-y-auto md:overflow-hidden bg-[#0a0a0a] custom-scrollbar" : "overflow-y-auto custom-scrollbar bg-[#0a0a0a]"}`}>
+          {/* CLOSE (X) BUTTON */}
+          <button
+            onClick={() => {
+              navigate("/");
+              setActivePage(null);
+            }}
+            aria-label={t("ui.close", "Kapat")}
+            className="fixed top-6 right-6 md:top-8 md:right-8 z-50 p-2.5 rounded-full bg-black/40 text-white/70 hover:text-[#ffb800] hover:bg-black/70 backdrop-blur-md transition-all duration-300 group min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer">
+            <svg
+              className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -50, opacity: 0 }}
             transition={{ delay: 0.1, type: "spring", damping: 25 }}
-            className={`w-full pointer-events-auto text-left md:my-auto ${activePage === "hakkimizda" ? "md:h-full md:flex md:flex-col md:justify-center" : ""} ${isWidePage ? "max-w-7xl" : "max-w-3xl"}`}>
+            className={`w-full pointer-events-auto text-left mx-auto md:my-auto ${activePage === "hakkimizda" ? "md:h-full md:flex md:flex-col md:justify-center" : ""} ${isWidePage ? "max-w-7xl" : "max-w-3xl"}`}>
             <button
               onClick={() => {
                 navigate("/");
