@@ -164,7 +164,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
             transition={{ delay: 0.1, type: "spring", damping: 25 }}
             className={`w-full pointer-events-auto text-left mx-auto md:my-auto ${activePage === "hakkimizda" ? "md:h-full md:flex md:flex-col md:justify-center" : ""} ${isWidePage ? "max-w-7xl" : "max-w-3xl"}`}>
             <button
-              onClick={handleClose}
+              onClick={() => setActivePage(null)}
               className="md:hidden font-display text-[#ffb800]/80 hover:text-[#ffb800] text-xs tracking-[0.25em] font-semibold mb-6 flex items-center gap-2 min-h-[44px]">
               <span className="text-lg">←</span> {t("ui.back_to_menu")}
             </button>
