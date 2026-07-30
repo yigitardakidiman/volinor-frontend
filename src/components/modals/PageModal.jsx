@@ -6,6 +6,7 @@ import VideoLibrary from "../../pages/VideoLibrary";
 import ProductsSlider from "./ProductsSlider";
 import DealershipSlider from "./DealershipSlider";
 import ReferencesBox from "./ReferencesBox";
+import AboutBox from "./AboutBox";
 
 const getMediaUrl = (url) => {
   if (!url) return "";
@@ -190,139 +191,9 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
 
             <div className="text-white/60 text-base md:text-lg font-light leading-relaxed">
               {activePage === "hakkimizda" && (
-                <>
-                  <div className="relative w-full">
-                    <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start justify-between">
-                      <div className="flex flex-col gap-3 w-full lg:w-[55%]">
-                        <div className="mb-1">
-                          <h1 className="font-display text-2xl md:text-4xl font-light tracking-[0.25em] md:tracking-[0.3em] text-white">
-                            HAKKIMIZDA
-                          </h1>
-                          <div className="h-[3px] w-10 bg-[#ffb800] mt-2"></div>
-                        </div>
-                        <p className="text-sm md:text-base text-white/80 leading-relaxed">
-                          {t("about.p1")}
-                        </p>
-                        <p className="text-sm md:text-base text-white/80 leading-relaxed">
-                          {t("about.p2")}
-                        </p>
-
-                        <div className="flex flex-col mt-0">
-                          {[
-                            <svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round">
-                              <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5" />
-                              <path d="M9 18h6" />
-                              <path d="M10 22h4" />
-                              <path d="M12 2v1" />
-                            </svg>,
-                            <svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round">
-                              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                              <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                              <line x1="12" y1="22.08" x2="12" y2="12" />
-                            </svg>,
-                            <svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round">
-                              <rect x="16" y="16" width="6" height="6" rx="1" />
-                              <rect x="2" y="16" width="6" height="6" rx="1" />
-                              <rect x="9" y="2" width="6" height="6" rx="1" />
-                              <path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" />
-                              <path d="M12 12V8" />
-                            </svg>,
-                            <svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round">
-                              <rect
-                                x="2"
-                                y="3"
-                                width="20"
-                                height="14"
-                                rx="2"
-                                ry="2"
-                              />
-                              <line x1="8" y1="21" x2="16" y2="21" />
-                              <line x1="12" y1="17" x2="12" y2="21" />
-                              <polygon points="10 8 15 10 10 12 10 8" />
-                            </svg>,
-                            <svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round">
-                              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                            </svg>,
-                          ].map((icon, idx) => {
-                            const num = idx + 1;
-                            return (
-                              <div key={num} className="group">
-                                <div className="flex items-center gap-4 py-1.5">
-                                  <div className="relative w-12 h-12 flex-shrink-0 flex items-center justify-center text-[#ffb800]/50 group-hover:text-[#ffb800] transition-colors">
-                                    <svg
-                                      className="absolute inset-0 w-full h-full text-[#ffb800]/30 group-hover:text-[#ffb800]/60 transition-colors"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="1.5">
-                                      <polygon points="12 2 21 7 21 17 12 22 3 17 3 7 12 2" />
-                                    </svg>
-                                    {icon}
-                                  </div>
-                                  <span className="text-sm md:text-base text-white/70 group-hover:text-white/90 transition-colors">
-                                    {t(`about.li${num}`)}
-                                  </span>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                      <div className="w-full lg:w-[40%] flex justify-center lg:justify-end mt-2 lg:mt-0">
-                        <div className="relative w-full max-w-sm lg:max-w-[380px] rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(255,184,0,0.05)] border border-[#ffb800]/10 group">
-                          <img
-                            src="/img/odtü-foto.jpeg"
-                            alt="ODTÜ"
-                            className="w-full h-[300px] md:h-[530px] object-cover transition-transform duration-700 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10 pointer-events-none"></div>
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
+                <div className="w-full mt-4 md:mt-6">
+                  <AboutBox />
+                </div>
               )}
               {activePage === "urunlerimiz" && (
                 <div className="w-full mt-4 md:mt-6">
