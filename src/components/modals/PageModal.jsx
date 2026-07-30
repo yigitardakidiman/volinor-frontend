@@ -114,6 +114,17 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
     }
   };
 
+  const handleClose = () => {
+    if (activePage === "siyah") {
+      navigate("/");
+      setActivePage(null);
+      if (setIsNavOpen) setIsNavOpen(false);
+    } else {
+      navigate("/siyah");
+      setActivePage("siyah");
+    }
+  };
+
   const isWidePage =
     activePage === "urunlerimiz" ||
     activePage === "referanslar" ||
@@ -121,7 +132,8 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
     activePage === "sertifika-ve-patentler" ||
     activePage === "iletisim" ||
     activePage === "hakkimizda" ||
-    activePage === "bayiliklerimiz";
+    activePage === "bayiliklerimiz" ||
+    activePage === "siyah";
 
   return (
     <AnimatePresence>
@@ -133,10 +145,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
           className={`absolute inset-y-0 left-0 md:left-[300px] right-0 z-[45] md:z-30 pointer-events-auto flex items-start md:items-center justify-center p-6 pt-24 md:p-16 border-l border-[#ffb800]/10 ${activePage === "hakkimizda" ? "overflow-y-auto md:overflow-hidden bg-[#0a0a0a] custom-scrollbar" : "overflow-y-auto custom-scrollbar bg-[#0a0a0a]"}`}>
           {/* CLOSE (X) BUTTON */}
           <button
-            onClick={() => {
-              navigate("/");
-              setActivePage(null);
-            }}
+            onClick={handleClose}
             aria-label={t("ui.close", "Kapat")}
             className="fixed top-6 right-6 md:top-8 md:right-8 z-50 p-2.5 rounded-full bg-black/40 text-white/70 hover:text-[#ffb800] hover:bg-black/70 backdrop-blur-md transition-all duration-300 group min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer">
             <svg
@@ -155,15 +164,12 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
             transition={{ delay: 0.1, type: "spring", damping: 25 }}
             className={`w-full pointer-events-auto text-left mx-auto md:my-auto ${activePage === "hakkimizda" ? "md:h-full md:flex md:flex-col md:justify-center" : ""} ${isWidePage ? "max-w-7xl" : "max-w-3xl"}`}>
             <button
-              onClick={() => {
-                navigate("/");
-                setActivePage(null);
-              }}
+              onClick={handleClose}
               className="md:hidden font-display text-[#ffb800]/80 hover:text-[#ffb800] text-xs tracking-[0.25em] font-semibold mb-6 flex items-center gap-2 min-h-[44px]">
               <span className="text-lg">←</span> {t("ui.back_to_menu")}
             </button>
 
-            {activePage !== "hakkimizda" && (
+            {activePage !== "hakkimizda" && activePage !== "siyah" && (
               <h1
                 className={`font-display font-light text-white whitespace-pre-line ${
                   activePage === "urunlerimiz" ||
@@ -190,6 +196,20 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
             )}
 
             <div className="text-white/60 text-base md:text-lg font-light leading-relaxed">
+              {activePage === "siyah" && (
+                <div className="w-full h-[65vh] flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 select-none">
+                  <img
+                    src="/img/volinor_kucuk.png"
+                    alt="Volinor Logo Icon"
+                    className="h-24 md:h-36 w-auto object-contain drop-shadow-[0_0_35px_rgba(255,184,0,0.35)]"
+                  />
+                  <img
+                    src="/img/volinor_yazı.png"
+                    alt="Volinor Logo Text"
+                    className="h-16 md:h-28 w-auto object-contain drop-shadow-[0_0_35px_rgba(255,255,255,0.25)]"
+                  />
+                </div>
+              )}
               {activePage === "hakkimizda" && (
                 <div className="w-full mt-4 md:mt-6">
                   <AboutBox />

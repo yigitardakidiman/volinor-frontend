@@ -26,10 +26,10 @@ export const AboutBox = () => {
           </h1>
           <div className="h-[3px] w-12 bg-[#ffb800] mb-6"></div>
 
-          <p className="text-sm md:text-base text-white/70 leading-relaxed font-light mb-6">
+          <p className="text-base md:text-lg text-white/70 leading-relaxed font-light mb-6">
             {t("about.p1")}
           </p>
-          <p className="text-sm md:text-base text-white/70 leading-relaxed font-light">
+          <p className="text-base md:text-lg text-white/70 leading-relaxed font-light">
             {t("about.p2")}
           </p>
         </div>
@@ -126,7 +126,7 @@ export const AboutBox = () => {
                 <div className="w-10 h-10 shrink-0 flex items-center justify-center">
                   {icon}
                 </div>
-                <span className="text-sm md:text-base text-white/80 font-light leading-relaxed">
+                <span className="text-base md:text-lg text-white/80 font-light leading-relaxed">
                   {t(`about.li${num}`)}
                 </span>
               </div>

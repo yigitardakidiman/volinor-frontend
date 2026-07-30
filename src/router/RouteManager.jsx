@@ -39,6 +39,8 @@ export const RouteManager = () => {
       setActivePage('model-kutuphanesi');
     } else if (path === '/video-kutuphanesi') {
       setActivePage('video-kutuphanesi');
+    } else if (path === '/siyah') {
+      setActivePage('siyah');
     } else if (path === '/' || path === '/auth') {
       setSelectedPart(null);
       if (location.state?.activePage) {
