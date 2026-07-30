@@ -173,7 +173,7 @@ export const ConfigPanel = () => {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: 50, opacity: 0 }}
                   transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                  className="absolute bottom-6 left-4 right-4 md:top-1/2 md:bottom-auto md:right-6 md:left-auto md:-translate-y-1/2 md:w-72 bg-[#050505]/30 backdrop-blur-md border border-white/10 rounded-xl p-5 md:p-6 pointer-events-auto z-20">
+                  className="absolute bottom-44 left-4 right-4 md:bottom-auto md:top-1/2 md:right-6 md:left-auto md:-translate-y-1/2 md:w-72 bg-[#050505]/30 backdrop-blur-md border border-white/10 rounded-xl p-5 md:p-6 pointer-events-auto z-20">
                   <h2 className="font-display text-lg md:text-xl font-semibold text-white mb-2 tracking-[0.2em] uppercase">
                     {t(partData.nameKey)}
                   </h2>

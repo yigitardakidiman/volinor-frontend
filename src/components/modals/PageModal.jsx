@@ -147,7 +147,7 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
           <button
             onClick={handleClose}
             aria-label={t("ui.close", "Kapat")}
-            className="fixed top-6 right-6 md:top-8 md:right-8 z-50 p-2.5 rounded-full bg-black/40 text-white/70 hover:text-[#ffb800] hover:bg-black/70 backdrop-blur-md transition-all duration-300 group min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer">
+            className="fixed top-6 right-6 md:top-8 md:right-8 z-50 p-2.5 rounded-full bg-black/40 text-white/70 hover:text-[#ffb800] hover:bg-black/70 backdrop-blur-md transition-all duration-300 group min-w-[44px] min-h-[44px] hidden md:flex items-center justify-center cursor-pointer">
             <svg
               className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90"
               fill="none"

@@ -43,7 +43,7 @@ export const AudioToggle = () => {
   return (
     <button
       onClick={toggleAudio}
-      className="fixed bottom-6 right-[100px] z-50 flex items-center justify-center px-3 py-[7px] bg-[#07080d]/80 border border-[#ffb800]/20 rounded-lg backdrop-blur-md shadow-[0_0_14px_rgba(255,184,0,0.05)] hover:-translate-y-1 hover:border-[#ffb800]/50 hover:shadow-[0_0_18px_rgba(255,184,0,0.18)] active:scale-95 transition-all duration-300 ease-in-out text-[#ffb800]"
+      className="fixed bottom-[72px] md:bottom-6 right-[100px] z-50 flex items-center justify-center px-3 py-[7px] bg-[#07080d]/80 border border-[#ffb800]/20 rounded-lg backdrop-blur-md shadow-[0_0_14px_rgba(255,184,0,0.05)] hover:-translate-y-1 hover:border-[#ffb800]/50 hover:shadow-[0_0_18px_rgba(255,184,0,0.18)] active:scale-95 transition-all duration-300 ease-in-out text-[#ffb800]"
       title={isPlaying ? "Sesi Durdur" : "Sesi Oynat"}
     >
       <AnimatePresence mode="wait">
