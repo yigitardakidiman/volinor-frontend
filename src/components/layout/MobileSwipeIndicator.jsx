@@ -107,7 +107,11 @@ export const MobileSwipeIndicator = () => {
       {/* Alt Ekran Home (Anasayfa) Butonu */}
       <button
         onClick={handleHomeClick}
-        className="flex items-center gap-2 px-5 py-2 rounded-full border border-white/20 text-white/90 bg-black/65 backdrop-blur-md hover:bg-white/15 hover:border-white/40 active:scale-95 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] font-display font-semibold tracking-widest text-[11px]"
+        className={`flex items-center gap-2 px-5 py-2 rounded-full border text-white/90 bg-black/65 backdrop-blur-md hover:bg-white/15 hover:border-white/40 active:scale-95 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] font-display font-semibold tracking-widest text-[11px] ${
+          selectedPart === null
+            ? 'border-amber-400/60 bg-amber-400/15 text-amber-300 shadow-[0_0_12px_rgba(251,191,36,0.25)]'
+            : 'border-white/20'
+        }`}
       >
         <svg
           width="14"

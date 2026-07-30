@@ -27,6 +27,7 @@ const MODULE_SEQUENCE = [
   { id: "subtitle2", url: "/simulasyon" },
   { id: "subtitle3", url: "/ileri-malzeme" },
   { id: "subtitle4", url: "/yapay-zeka" },
+  { id: null, url: "/" },
 ];
 
 export const ConfigPanel = () => {
