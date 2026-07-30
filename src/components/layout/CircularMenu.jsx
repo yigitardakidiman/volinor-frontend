@@ -95,8 +95,6 @@ export const CircularMenu = ({
   const hoverLineH  = Math.max(36,  Math.round(48  * sm));
   const vertLineH   = Math.max(48,  Math.round(64  * sm));
 
-  const [isPartsOpen, setIsPartsOpen] = useState(false);
-
   return (
     <>
       {/* Masaüstü Dairesel Menü Arka Plan Çizgisi */}
@@ -108,99 +106,18 @@ export const CircularMenu = ({
         </div>
       )}
 
-      {/* Mobil Parça Menüsü Açma/Kapama Butonu */}
+      {/* Menü Elemanları (Yalnızca Masaüstü) */}
       <AnimatePresence>
-        {isMobile && !isNavOpen && (
+        {!isNavOpen && !isMobile && (
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-30 pointer-events-auto">
-            <div
-              className="flex items-center justify-center w-8 h-16 bg-black/60 backdrop-blur-md border border-white/10 border-l-0 rounded-r-xl cursor-pointer shadow-[0_0_15px_rgba(0,0,0,0.5)]"
-              onClick={() => setIsPartsOpen(!isPartsOpen)}>
-              <div className="flex flex-col gap-1 items-center justify-center">
-                <div className={`w-[2px] h-3 bg-white/70 rounded-full transition-transform duration-300 origin-bottom ${isPartsOpen ? "-rotate-45" : "rotate-45"}`} />
-                <div className={`w-[2px] h-3 bg-white/70 rounded-full transition-transform duration-300 origin-top ${isPartsOpen ? "rotate-45" : "-rotate-45"}`} />
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Menü Elemanları */}
-      <AnimatePresence>
-        {!isNavOpen && (!isMobile || isPartsOpen) && (
-          <motion.div
-            initial={isMobile ? { opacity: 0, x: -50 } : { opacity: 0, scale: 0.95 }}
-            animate={isMobile ? { opacity: 1, x: 0 } : { opacity: 1, scale: 1 }}
-            exit={isMobile ? { opacity: 0, x: -50 } : { opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className={
-              isMobile
-                ? "absolute left-10 top-1/2 -translate-y-1/2 z-20 pointer-events-auto flex flex-col gap-8 pl-2"
-                : "absolute top-1/2 -translate-y-1/2 z-20 pointer-events-none"
-            }
-            style={
-              isMobile
-                ? {}
-                : { left: `${leftOffset}px`, width: `${circleSize}px`, height: `${circleSize}px` }
-            }>
-
-            {/* Mobilde Menü Öğelerini Bağlayan İnce Timeline Çizgisi */}
-            {isMobile && (
-              <div className="absolute left-[30px] top-4 bottom-4 w-[1px] bg-white/10 z-0" />
-            )}
-
+            className="absolute top-1/2 -translate-y-1/2 z-20 pointer-events-none"
+            style={{ left: `${leftOffset}px`, width: `${circleSize}px`, height: `${circleSize}px` }}>
             {menuItems.map((item, index) => {
               const isSelected = selectedPart === item.id;
-
-              if (isMobile) {
-                // MOBİL TASARIM (Timeline / Stepper Görünümü)
-                return (
-                  <div
-                    key={item.id}
-                    className="relative flex items-center cursor-pointer group min-h-[44px] z-10"
-                    onClick={() => {
-                      if (isSelected) {
-                        navigate("/");
-                      } else {
-                        if (item.id === "subtitle3") {
-                          playWhooshSound();
-                        }
-                        navigate(item.url);
-                      }
-                      setSelectedPart(isSelected ? null : item.id);
-                      if (!isSelected) setIsPartsOpen(false);
-                    }}>
-
-                    {/* Düğüm (Node) */}
-                    <div className="relative flex items-center justify-center min-w-[44px] min-h-[44px]">
-                      <div
-                        className={`absolute w-[2px] h-14 bg-gradient-to-b from-transparent via-[#ffb800] to-transparent transition-opacity duration-300 ${isSelected ? "opacity-100 shadow-[0_0_10px_#ffb800]" : "opacity-0"}`}
-                      />
-                      <div
-                        className={`w-10 h-10 rounded-full border-[1px] transition-all duration-300 bg-transparent ${isSelected ? "border-[#ffb800] bg-[#ffb800]/10 shadow-[0_0_15px_rgba(255, 184, 0,0.3)] scale-110" : "border-white/20 group-hover:border-white/50 group-hover:bg-white/5 scale-90"}`}
-                      />
-                      <div
-                        className={`absolute rounded-full transition-all duration-300 ${isSelected ? "w-3 h-3 bg-white shadow-[0_0_15px_#ffb800,0_0_30px_#ffb800]" : "w-1.5 h-1.5 bg-white/60 group-hover:bg-white/90 group-hover:shadow-[0_0_10px_rgba(255,255,255,0.5)]"}`}
-                      />
-                    </div>
-
-                    {/* Metinler (Sağ Tarafta) */}
-                    <div className="flex flex-col items-start ml-4 whitespace-nowrap bg-black/40 backdrop-blur-sm p-2 rounded-lg border border-white/5">
-                      <div
-                        className={`font-display text-sm font-semibold tracking-[0.2em] transition-all duration-300 ${isSelected ? "text-[#ffb800] drop-shadow-[0_0_8px_rgba(255, 184, 0,0.5)]" : "text-white/70 group-hover:text-white"}`}>
-                        {item.label}
-                      </div>
-                      <div
-                        className={`font-sans text-[9px] font-medium tracking-[0.12em] mt-1 transition-all duration-300 ${isSelected ? "text-white/70" : "text-white/40 group-hover:text-white/60"}`}>
-                        {item.subLabel}
-                      </div>
-                    </div>
-                  </div>
-                );
-              }
 
               // MASAÜSTÜ TASARIM (Dairesel)
               const totalItems = menuItems.length;
