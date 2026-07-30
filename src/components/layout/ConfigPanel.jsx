@@ -83,14 +83,6 @@ export const ConfigPanel = () => {
   const isAnalysisMode =
     selectedPart === "subtitle1" && searchParams.get("mode") === "analiz";
 
-  const toggleAnalysisMode = () => {
-    if (isAnalysisMode) {
-      setSearchParams({});
-    } else {
-      setSearchParams({ mode: "analiz" });
-    }
-  };
-
   const partData = selectedPart ? PART_OPTIONS[selectedPart] : null;
 
   const menuItems = useMemo(() => {

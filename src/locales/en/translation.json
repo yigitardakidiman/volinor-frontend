@@ -20,8 +20,7 @@
     "ai_sub": "ALGORITHM & AUTONOMY",
     "analysis_start": "INITIATE STRUCTURAL ANALYSIS",
     "analysis_stop": "RETURN TO STANDARD VIEW",
-    "try_ozvia": "Try Ozvia",
-    "swipe_hint": "Swipe left / right to navigate"
+    "try_ozvia": "Try Ozvia"
   },
   "parts": {
     "modeling": {
