@@ -221,103 +221,268 @@ export const PageModal = ({ activePage, setActivePage, setIsNavOpen }) => {
                 </div>
               )}
               {activePage === "iletisim" && (
-                <div className="flex flex-col gap-8 md:gap-10 text-left">
-                  <div>
-                    <h3 className="font-display text-xl md:text-2xl font-semibold text-white mb-4 tracking-[0.2em]">
-                      {t("contact.heading")}
-                    </h3>
-                    <p className="leading-relaxed text-sm md:text-base">
-                      info@volinor.com
-                      <br />
-                      0533 654 7937
-                      <br />
-                      Mustafa Kemal Mah. Dumlupınar Bul. No:280 G İç Kapı
-                      No:1260, Çankaya / Ankara
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col md:flex-row md:items-stretch gap-8 md:gap-12">
-                    <div className="flex-1">
-                      <form
-                        className="flex flex-col gap-4"
-                        onSubmit={handleEmailSubmit}>
-                        <input
-                          type="text"
-                          required
-                          value={formData.name}
-                          onChange={(e) =>
-                            setFormData({ ...formData, name: e.target.value })
-                          }
-                          placeholder={t("contact.name_placeholder")}
-                          className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
-                          disabled={submitStatus.loading}
-                        />
-                        <input
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) =>
-                            setFormData({ ...formData, email: e.target.value })
-                          }
-                          placeholder={t("contact.email_placeholder")}
-                          className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors text-sm min-h-[44px]"
-                          disabled={submitStatus.loading}
-                        />
-                        <textarea
-                          placeholder={t("contact.message_placeholder")}
-                          required
-                          value={formData.message}
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              message: e.target.value,
-                            })
-                          }
-                          rows="4"
-                          className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-white/40 transition-colors resize-none text-sm min-h-[100px]"
-                          disabled={submitStatus.loading}></textarea>
-
-                        {submitStatus.success && (
-                          <div className="text-green-400 text-xs tracking-wider">
-                            {t("contact.success")}
-                          </div>
-                        )}
-                        {submitStatus.error && (
-                          <div className="text-red-400 text-xs tracking-wider">
-                            {submitStatus.error}
-                          </div>
-                        )}
-
-                        <button
-                          type="submit"
-                          disabled={submitStatus.loading}
-                          className={`font-display bg-white text-black text-sm tracking-[0.25em] font-semibold py-3 rounded-lg transition-colors mt-2 min-h-[44px] ${submitStatus.loading ? "opacity-50 cursor-not-allowed" : "hover:bg-white/80"}`}>
-                          {submitStatus.loading
-                            ? t("contact.sending")
-                            : t("contact.send")}
-                        </button>
-                      </form>
-                    </div>
-
+                <div className="w-full max-w-6xl mx-auto py-2">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+                    {/* Left side: Image container */}
                     <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 }}
-                      className="flex-1 flex flex-col">
-                      <div className="h-full min-h-[300px] rounded-xl overflow-hidden border border-white/10 relative">
-                        <iframe
-                          title="Volinor Konum"
-                          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.889!2d32.7487!3d39.9025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f190a9cea8f%3A0xd3862ea8bc96f59!2sMustafa%20Kemal%2C%20Dumlup%C4%B1nar%20Blv.%20No%3A280%2C%2006510%20%C3%87ankaya%2FAnkara!5e0!3m2!1str!2str!4v1718700000000!5m2!1str!2str"
-                          className="absolute inset-0 w-full h-full"
-                          style={{
-                            border: 0,
-                            filter:
-                              "invert(90%) hue-rotate(180deg) brightness(0.95) contrast(0.9)",
-                          }}
-                          allowFullScreen=""
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                        />
+                      initial={{ opacity: 0, x: -30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="lg:col-span-5 relative rounded-2xl overflow-hidden border border-[#ffb800]/20 shadow-[0_0_30px_rgba(255,184,0,0.08)] min-h-[380px] lg:min-h-[500px] flex items-center justify-center bg-black/40 group">
+                      {/* Corner decorations matching site theme */}
+                      <div className="hidden md:block absolute top-4 left-4 w-6 h-6 border-t-[1.5px] border-l-[1.5px] border-[#ffb800]/60 z-20 pointer-events-none" />
+                      <div className="hidden md:block absolute bottom-4 right-4 w-6 h-6 border-b-[1.5px] border-r-[1.5px] border-[#ffb800]/60 z-20 pointer-events-none" />
+
+                      <img
+                        src="/img/odtü-foto.jpeg"
+                        alt="Volinor Office"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none" />
+                      <div className="absolute bottom-6 left-6 right-6 z-10 text-left">
+                        <div className="text-lg font-display font-semibold text-white tracking-wider">
+                          {t("contact.office_location")}
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Right side: Form & Contact info */}
+                    <motion.div
+                      initial={{ opacity: 0, x: 30 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.5, delay: 0.1 }}
+                      className="lg:col-span-7 flex flex-col justify-between text-left gap-6">
+                      {/* Header */}
+                      <div>
+                        <span className="text-xs font-semibold text-[#ffb800] uppercase tracking-[0.3em] block mb-1">
+                          {t("contact.subtitle")}
+                        </span>
+                        <h2 className="font-display text-3xl md:text-4xl font-light tracking-[0.2em] text-white uppercase mb-2">
+                          {t("contact.heading")}
+                        </h2>
+                        <div className="h-[2px] w-12 bg-[#ffb800] mb-4"></div>
+                        <p className="text-sm text-gray-300 font-light leading-relaxed">
+                          {t("contact.description")}
+                        </p>
+                      </div>
+
+                      {/* Content grid: Form on Left (7 cols), Info & Map on Right (5 cols) */}
+                      <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                        {/* Form (md:col-span-7) */}
+                        <form
+                          onSubmit={handleEmailSubmit}
+                          className="md:col-span-7 flex flex-col gap-4">
+                          {/* Input: Name */}
+                          <div className="relative flex items-center">
+                            <span className="absolute left-4 text-gray-400 group-focus-within:text-[#ffb800]">
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="1.5"
+                                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                                />
+                              </svg>
+                            </span>
+                            <input
+                              type="text"
+                              required
+                              value={formData.name}
+                              onChange={(e) =>
+                                setFormData({ ...formData, name: e.target.value })
+                              }
+                              placeholder={t("contact.name_placeholder")}
+                              className="w-full bg-[#121418]/90 border border-white/10 rounded-lg pl-11 pr-4 py-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-[#ffb800]/60 focus:shadow-[0_0_15px_rgba(255,184,0,0.15)] transition-all text-sm"
+                              disabled={submitStatus.loading}
+                            />
+                          </div>
+
+                          {/* Input: Email */}
+                          <div className="relative flex items-center">
+                            <span className="absolute left-4 text-gray-400">
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="1.5"
+                                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                />
+                              </svg>
+                            </span>
+                            <input
+                              type="email"
+                              required
+                              value={formData.email}
+                              onChange={(e) =>
+                                setFormData({ ...formData, email: e.target.value })
+                              }
+                              placeholder={t("contact.email_placeholder")}
+                              className="w-full bg-[#121418]/90 border border-white/10 rounded-lg pl-11 pr-4 py-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-[#ffb800]/60 focus:shadow-[0_0_15px_rgba(255,184,0,0.15)] transition-all text-sm"
+                              disabled={submitStatus.loading}
+                            />
+                          </div>
+
+                          {/* Textarea: Message */}
+                          <div className="relative flex items-start">
+                            <span className="absolute left-4 top-3.5 text-gray-400">
+                              <svg
+                                className="w-4 h-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="1.5"
+                                  d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                                />
+                              </svg>
+                            </span>
+                            <textarea
+                              placeholder={t("contact.message_placeholder")}
+                              required
+                              value={formData.message}
+                              onChange={(e) =>
+                                setFormData({ ...formData, message: e.target.value })
+                              }
+                              rows="4"
+                              className="w-full bg-[#121418]/90 border border-white/10 rounded-lg pl-11 pr-4 py-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-[#ffb800]/60 focus:shadow-[0_0_15px_rgba(255,184,0,0.15)] transition-all resize-none text-sm min-h-[120px]"
+                              disabled={submitStatus.loading}></textarea>
+                          </div>
+
+                          {submitStatus.success && (
+                            <div className="text-green-400 text-xs tracking-wider font-medium">
+                              {t("contact.success")}
+                            </div>
+                          )}
+                          {submitStatus.error && (
+                            <div className="text-red-400 text-xs tracking-wider font-medium">
+                              {submitStatus.error}
+                            </div>
+                          )}
+
+                          {/* Submit Button */}
+                          <button
+                            type="submit"
+                            disabled={submitStatus.loading}
+                            className={`font-display bg-[#ffb800] hover:bg-[#e5a600] text-black text-sm tracking-[0.25em] font-bold py-3.5 rounded-lg transition-all mt-2 shadow-[0_0_20px_rgba(255,184,0,0.2)] hover:shadow-[0_0_25px_rgba(255,184,0,0.4)] active:scale-[0.99] cursor-pointer ${
+                              submitStatus.loading ? "opacity-50 cursor-not-allowed" : ""
+                            }`}>
+                            {submitStatus.loading
+                              ? t("contact.sending")
+                              : t("contact.send")}
+                          </button>
+                        </form>
+
+                        {/* Contact Details & Map (md:col-span-5) */}
+                        <div className="md:col-span-5 flex flex-col justify-between h-full gap-6">
+                          <div className="flex flex-col gap-4 text-xs md:text-sm">
+                            {/* Mail */}
+                            <div className="flex items-center gap-3 pb-3 border-b border-white/10">
+                              <span className="text-[#ffb800] shrink-0">
+                                <svg
+                                  className="w-4 h-4"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor">
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="1.5"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                  />
+                                </svg>
+                              </span>
+                              <a
+                                href="mailto:info@volinor.com"
+                                className="text-gray-300 hover:text-[#ffb800] transition-colors">
+                                info@volinor.com
+                              </a>
+                            </div>
+
+                            {/* Phone */}
+                            <div className="flex items-center gap-3 pb-3 border-b border-white/10">
+                              <span className="text-[#ffb800] shrink-0">
+                                <svg
+                                  className="w-4 h-4"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor">
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="1.5"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                  />
+                                </svg>
+                              </span>
+                              <a
+                                href="tel:05336547937"
+                                className="text-gray-300 hover:text-[#ffb800] transition-colors">
+                                0533 654 7937
+                              </a>
+                            </div>
+
+                            {/* Location */}
+                            <div className="flex items-start gap-3 pb-3 border-b border-white/10">
+                              <span className="text-[#ffb800] shrink-0 mt-0.5">
+                                <svg
+                                  className="w-4 h-4"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor">
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="1.5"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                  />
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="1.5"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                  />
+                                </svg>
+                              </span>
+                              <p className="text-gray-300 text-xs leading-relaxed">
+                                {t("contact.address")}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Map Container */}
+                          <div className="h-36 w-full rounded-xl overflow-hidden border border-[#ffb800]/20 relative shadow-md">
+                            <iframe
+                              title="Volinor Konum"
+                              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.889!2d32.7487!3d39.9025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f190a9cea8f%3A0xd3862ea8bc96f59!2sMustafa%20Kemal%2C%20Dumlup%C4%P1nar%20Blv.%20No%3A280%2C%2006510%20%C3%87ankaya%2FAnkara!5e0!3m2!1str!2str!4v1718700000000!5m2!1str!2str"
+                              className="absolute inset-0 w-full h-full"
+                              style={{
+                                border: 0,
+                                filter:
+                                  "invert(90%) hue-rotate(180deg) brightness(0.95) contrast(0.9)",
+                              }}
+                              allowFullScreen=""
+                              loading="lazy"
+                              referrerPolicy="no-referrer-when-downgrade"
+                            />
+                          </div>
+
+                          {/* Bottom Footer Text */}
+                          <div className="pt-2 border-t border-white/10 text-center md:text-right">
+                            <span className="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-semibold">
+                              {t("contact.country")}
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </motion.div>
                   </div>

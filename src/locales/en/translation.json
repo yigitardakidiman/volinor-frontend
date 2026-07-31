@@ -104,11 +104,16 @@
     "li5": "Digital Twin applications."
   },
   "contact": {
+    "subtitle": "C O N T A C T",
     "heading": "GET IN TOUCH",
+    "description": "Contact us for your projects and collaborations.",
+    "office_location": "METU Technopolis / Ankara",
+    "address": "Mustafa Kemal Mah. Dumlupinar Bul. No:280 G Inner Door No:1260, Cankaya / Ankara",
+    "country": "ANKARA • TURKEY",
     "name_placeholder": "Full Name",
     "email_placeholder": "Email Address",
     "message_placeholder": "Your Message",
-    "send": "SEND",
+    "send": "SEND MESSAGE",
     "sending": "SENDING...",
     "success": "Your message has been sent successfully. Thank you!",
     "error": "An error occurred while sending your message."

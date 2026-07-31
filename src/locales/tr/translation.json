@@ -104,11 +104,16 @@
     "li5": "Digital Twin uygulamaları alanlarında hizmet sunar"
   },
   "contact": {
+    "subtitle": "İ L E T İ Ş İ M",
     "heading": "BİZE ULAŞIN",
+    "description": "Projeleriniz ve iş birlikleri için bizimle iletişime geçin.",
+    "office_location": "ODTÜ Teknokent / Ankara",
+    "address": "Mustafa Kemal Mah. Dumlupınar Bul. No:280 G İç Kapı No:1260, Çankaya / Ankara",
+    "country": "ANKARA • TÜRKİYE",
     "name_placeholder": "Adınız Soyadınız",
     "email_placeholder": "E-posta Adresiniz",
     "message_placeholder": "Mesajınız",
-    "send": "GÖNDER",
+    "send": "MESAJI GÖNDER",
     "sending": "GÖNDERİLİYOR...",
     "success": "Mesajınız başarıyla gönderildi. Teşekkürler!",
     "error": "Mesaj gönderilirken bir hata oluştu."
